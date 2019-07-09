@@ -1,17 +1,12 @@
 module Main where
 
 import System.IO
+import Heap hiding (Heap(..))
 import SkewBinomialHeap
-
-decompose :: (Ord a) => Heap a -> [a]
-decompose [] = []
-decompose h = x:decompose h'
-    where x = findMin h
-          h' = deleteMin h
 
 main :: IO()
 main = do
-  let h1 = foldl (flip insert) empty $ take 10 [1,3..]
+  let h1 = foldl (flip insert) (empty::SkewBinomialHeap Int) $ take 10 [1,3..]
   let h2 = foldl (flip insert) empty $ reverse . take 10 $ [4,5..]
   let h3 = merge h1 h2
   print h1
@@ -21,4 +16,3 @@ main = do
   print . deleteMin . deleteMin $ h3
   print $ merge h3 h3
   print . decompose $ merge h3 h3
-  putStrLn "Test"
