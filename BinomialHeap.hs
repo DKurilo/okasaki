@@ -1,4 +1,13 @@
-module Main where
+module BinomialHeap
+    ( Tree
+    , Heap
+    , empty
+    , isEmpty
+    , insert
+    , merge
+    , findMin
+    , deleteMin
+    ) where
 
 import System.IO
 
@@ -59,23 +68,3 @@ deleteMin ts = merge (reverse ts1) ts2
               | root t < root t' = (t, ts)
               | otherwise = (t', t:ts')
               where (t', ts') = getMin ts
-
-decompose :: (Ord a) => Heap a -> [a]
-decompose [] = []
-decompose h = x:decompose h'
-    where x = findMin h
-          h' = deleteMin h
-
-main :: IO()
-main = do
-  let h1 = foldl (\h x -> insert x h) empty $ take 10 [1,3..]
-  let h2 = foldl (\h x -> insert x h) empty $ reverse . take 10 $ [4,5..]
-  let h3 = merge h1 h2
-  putStrLn . show $ h1
-  putStrLn . show $ h2
-  putStrLn . show . findMin $ h3
-  putStrLn . show . findMin . deleteMin $ h3
-  putStrLn . show . deleteMin . deleteMin $ h3
-  putStrLn . show $ merge h3 h3
-  putStrLn . show . decompose $ merge h3 h3
-  putStrLn "Test"

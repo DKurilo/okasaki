@@ -1,7 +1,7 @@
 module Main where
 
 import System.IO
-import SkewBinomialHeap
+import BinomialHeap
 
 decompose :: (Ord a) => Heap a -> [a]
 decompose [] = []
@@ -21,4 +21,3 @@ main = do
   print . deleteMin . deleteMin $ h3
   print $ merge h3 h3
   print . decompose $ merge h3 h3
-  putStrLn "Test"
