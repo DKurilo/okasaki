@@ -1,5 +1,7 @@
 module RandomAccessList (RandomAccessList(..)) where
 
+import Prelude hiding (tail, head, lookup)
+
 class RandomAccessList l where
     empty :: l a
     isEmpty :: l a -> Bool
